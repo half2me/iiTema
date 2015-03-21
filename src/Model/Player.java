@@ -63,7 +63,7 @@ public class Player extends BasicGameElement {
         System.out.println("PlaceMod method from Player class");
     //    if(this.canPlaceMod && this.inAir){
     //        this.GetPosition().AddElement(m);
-        }
+    //    }
     }
 
 
