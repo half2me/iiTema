@@ -20,7 +20,6 @@ public class Oil extends Modifier {
      */
     public void Modify(Player p) {
         System.out.println("Modify method from Oil class");
-        // TODO implement here
     }
 
 
