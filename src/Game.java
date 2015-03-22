@@ -1,15 +1,22 @@
-import java.util.*;
+import Model.Map;
+import Model.Player;
+import com.sun.tools.javac.jvm.Gen;
+
+import java.util.ArrayList;
 
 /**
  * This class is responsible for the most important components of the game.
  */
 public class Game {
 
+    private Map map;
+    private ArrayList<Player> players;
 
     /**
      * That is az empty constructor for the Game class.
      */
     public Game() {
+        this.players = new ArrayList<Player>(1);
     }
 
 
@@ -18,7 +25,8 @@ public class Game {
      */
     public void GenerateRandomMap() {
         System.out.println("GenerateRandomMap method from Game class");
-        // TODO implement here
+        map = new Map(100); // 100 blocks
+        map.PlaceRandomMods(90);
     }
 
 
@@ -28,7 +36,9 @@ public class Game {
      */
     public void CreatePlayer(String name) {
         System.out.println("CreatePlayer method from Game class");
-        // TODO implement here
+        Player p = new Player(name);
+        players.add(p);
+        this.map.AddElement(0, p); // Add the player to the start line
     }
 
     /**
@@ -37,6 +47,9 @@ public class Game {
     public void NewGame() {
         System.out.println("NewGame method from Game class");
         // TODO implement here
+        GenerateRandomMap();
+        CreatePlayer("TestPlayer");
+        this.map.debugPrintMap();
     }
 
     /**
@@ -48,10 +61,22 @@ public class Game {
     }
 
     /**
+     * Move the game along by a cycle
+     * Move the player by their speed etc.
+     */
+    public void tick()
+    {
+        for(Player p : players){
+            map.MoveElement(p.GetSpeed(), p);
+            p.Step();
+        }
+    }
+
+    /**
      * @param args
      */
     public static void main(String[] args) {
-        // TODO implement here
+
     }
 
 

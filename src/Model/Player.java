@@ -1,58 +1,58 @@
 package Model;
-import java.util.*;
 
 /**
- * The class can show us the properties of the Players.
+ * The class represents a player
  */
 public class Player extends BasicGameElement {
 
 
     /**
      * Init a player.
+     * @param name name of the player
      */
-    public Player() {
-        this.type = "Player";
+    public Player(String name) {
         this.inAir = false;
         this.speed = 0;
         this.canPlaceMod = true;
         this.speedChangeable = true;
+        this.name = name;
     }
 
 
     /**
      * Unique ID of the Player.
      */
-    protected int uID;
+    private int uID;
 
 
     /**
      * Name of the Player.
      */
-    protected String name;
+    private String name;
 
 
     /**
      * This shows the Player is in the air or not.
      */
-    protected boolean inAir;
+    private boolean inAir;
 
 
     /**
      * Speed of the Player.
      */
-    protected int speed;
+    private int speed;
 
 
     /**
      * This shows the Player can place modifiers or not.
      */
-    protected boolean canPlaceMod;
+    private boolean canPlaceMod;
 
 
     /**
      * This parameter shows us the Player can modify his/her speed or not.
      */
-    protected boolean speedChangeable;
+    private boolean speedChangeable;
 
 
     /**
@@ -61,9 +61,9 @@ public class Player extends BasicGameElement {
      */
     public void PlaceMod(Modifier m) {
         System.out.println("PlaceMod method from Player class");
-    //    if(this.canPlaceMod && this.inAir){
-    //        this.GetPosition().AddElement(m);
-    //    }
+        if(this.canPlaceMod && this.inAir){
+            this.GetPosition().AddElement(m);
+        }
     }
 
 
@@ -73,7 +73,16 @@ public class Player extends BasicGameElement {
      */
     public void ModifySpeed(int bps) {
         System.out.println("ModifySpeed method from Player class");
-        // TODO implement here
+        this.speed = bps;
+    }
+
+
+    /**
+     * @return the speed of the player
+     */
+    public int GetSpeed() {
+        System.out.println("GetSpeed method from Player class");
+        return this.speed;
     }
 
 
@@ -82,25 +91,33 @@ public class Player extends BasicGameElement {
      */
     public void Jump() {
         System.out.println("Jump method from Player class");
-        // TODO implement here
+        this.inAir = true;
     }
 
 
     /**
-     * This realizes a step of the Player.
+     * After a player's position has changed, this method should be called
+     * This method is used to cycle through any modifiers which are under the player
+     * and if needed execute their modifying function.
      */
     public void Step() {
         System.out.println("Step method from Player class");
-        // TODO implement here
+        if(!inAir){
+            for(BasicGameElement e : this.GetPosition().GetElements()){
+                if(e instanceof Modifier){
+                    ((Modifier) e).Modify(this);
+                }
+            }
+        }
     }
 
 
     /**
-     * Using this method the speed of the Player will be unchangeable.
+     * Using this to lock the Player's speed
      */
     public void LockSpeed() {
         System.out.println("LockSpeed method from Player class");
-    //    this.speedChangeable = false;
+        this.speedChangeable = false;
     }
 
 

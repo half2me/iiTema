@@ -1,5 +1,4 @@
 package Model;
-import java.util.*;
 
 /**
  * This class represents the Glue modifier.
@@ -16,11 +15,11 @@ public class Glue extends Modifier {
 
     /**
      * @param p
-     * This method can change the actual speed of the Player so after that the speed will be halved.
+     * Slows the player to half-speed
      */
     public void Modify(Player p) {
         System.out.println("Modify method from Glue class");
-        // TODO implement here
+        p.ModifySpeed(p.GetSpeed()/2);
     }
 
 
