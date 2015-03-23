@@ -1,8 +1,9 @@
 import Model.Map;
 import Model.Player;
-import com.sun.tools.javac.jvm.Gen;
-import java.io.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**

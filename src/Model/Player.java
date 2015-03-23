@@ -78,7 +78,7 @@ public class Player extends BasicGameElement {
      */
     public int GetSpeed() {
         System.out.println("GetSpeed method from Player class");
-        return null;
+        return this.speed;
     }
 
 
