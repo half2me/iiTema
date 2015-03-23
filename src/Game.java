@@ -1,5 +1,4 @@
-import Model.Map;
-import Model.Player;
+import Model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,9 +72,7 @@ public class Game {
     }
 
 
-    /**
-     * @param args
-     */
+
     public static boolean beolvas(String g,char I,char N,int eddig/*,char O = 'I'*/)throws IOException{
         boolean igaz= false;
         char c; int a;
@@ -98,48 +95,66 @@ public class Game {
     }
 
     public static void main(String[] args) throws IOException{
+        Game myGame = new Game();
         int i=0;
         do{
         if(beolvas("Uj jatekot szeretne inditani? (I/N)",'I','N',i++)){
-            if(beolvas("Olaly foltot szeretne letenni? (I/N)",'I','N',i++)){
-                if(beolvas("Eppen ugrik? (I/N)",'I','N',i++)){
-                    if(beolvas("A csapda utkozne mas csapdaval ? (I/N)",'I','N',i++)){
+            myGame.NewGame();
+            if(beolvas("Szeretne csapdat letenni? (I/N)",'I','N',i++)) {
+                if (beolvas("Olaj foltot szeretne letenni? (I/N)", 'I', 'N', i++)) {
+                    if (beolvas("Eppen ugrik? (I/N)", 'I', 'N', i++)) {
+                        if (beolvas("A csapda utkozne mas csapdaval ? (I/N)", 'I', 'N', i++)) {
 
-                        sorbair("a csapda elhelyezese nem tortenik meg", i);
-                    }else{
-                        sorbair("a csapda elhelyezese",i);
+                            sorbair("a csapda elhelyezese nem tortenik meg", i);
+                        } else {
+                            sorbair("a csapda elhelyezese", i);
+                            myGame.players.get(0).PlaceMod(new Oil());
+                        }
+                    } else sorbair("a csapda elhelyezese nem tortenik meg", i);
 
-                    }
-                }else sorbair("a csapda elhelyezese nem tortenik meg",i);
+                } else if (beolvas("Ragacsot szeretne letenni? (I/N)", 'I', 'N', i++)) {
+                    if (beolvas(" Eppen ugrik? (I/N)", 'I', 'N', i++)) {
+                        if (beolvas(" A csapda utkozne mas csakpdaval ? (I/N)", 'I', 'N', i++)) {
 
-            }else if(beolvas("Ragacsot szeretne letenni? (I/N)",'I','N',i++)){
-                if(beolvas(" Eppen ugrik? (I/N)",'I','N',i++)){
-                    if(beolvas(" A csapda utkozne mas csakpdaval ? (I/N)",'I','N',i++)){
-
-                        sorbair("a csapda elhelyezese nem tortenik meg",i);
-                    }else sorbair("a csapda elhelyezese",i);
-                }else sorbair("a csapda elhelyezese nem tortenik meg",i);
+                            sorbair("a csapda elhelyezese nem tortenik meg", i);
+                        } else {
+                            sorbair("a csapda elhelyezese", i);
+                            myGame.players.get(0).PlaceMod(new Glue());
+                        }
+                    } else sorbair("a csapda elhelyezese nem tortenik meg", i);
+                }
             }else sorbair("tovabb lepes",i);
+            myGame.players.get(0).Step();
             i=1;
             if(beolvas("Akadaly kovetkezik: Atugorja? (I/N)",'N','I',i++)){
                 if(beolvas("Milyen akadaly kovetkezik Szakadek ? (I/N)",'N','I',i++)){
                     if(beolvas("Milyen akadaly kovetkezik  Ragacs vagy Olaj folt? ? (R/O)",'R','O',i++)){
-
+                        new Glue().Modify(myGame.players.get(0));
+                        //myGame.players.get(0).ModifySpeed(myGame.players.get(0).GetSpeed / 2);
                         sorbair("Az on sebessege fokozott mertekben lecsokkent",i);
-                    }else sorbair("Most kis idore nem tudja megvaltoztani a sebesseget.",i);
-                }else sorbair("On sajnos kiesett a jatekbol.",i);
+                    }else{ sorbair("Most kis idore nem tudja megvaltoztani a sebesseget.",i);
+                    new Oil().Modify(myGame.players.get(0));}
+                }else{
+                    sorbair("On sajnos kiesett a jatekbol.",i);
+                    new Abyss().Modify(myGame.players.get(0));
+                }
             }i=1;
             if(beolvas("Kivanja modositani a sebesseget? (I/N)",'I','N',i++)) {
                 if (beolvas("Olajtocsa hatasa alatt van? (I/N)", 'N', 'I', i++)) {
                     if (beolvas("Gyorsitani vagy Lassitani akar? (G/L))", 'G', 'L', i++)) {
+                        myGame.players.get(0).ModifySpeed(2);
+                        sorbair("Az on sebessege megnovekedett", i);
+                    } else {
+                        myGame.players.get(0).ModifySpeed(1);
+                        sorbair("Az on sebessege csokent", i);
 
-                        sorbair("Az on sebessege megnovekedett",i);
-                    } else sorbair("Az on sebessege csokent",i);
+                    }
                 }
             }i=1;
 
             String nyertes = "nyert";
             System.out.print("vege a jateknak a nyertes: "); System.out.println(nyertes);
+            myGame.Exit();
         }i=0;
 
         }while(beolvas("Kivanja ujra kezdeni (I/N)",'I','N',i=0)==true);
