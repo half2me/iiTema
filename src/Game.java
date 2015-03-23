@@ -138,7 +138,11 @@ public class Game {
                     sorbair("On sajnos kiesett a jatekbol.",i);
                     new Abyss().Modify(myGame.players.get(0));
                 }
-            }i=1;
+            }else {
+                myGame.players.get(0).Jump();
+            }
+                i=1;
+
             if(beolvas("Kivanja modositani a sebesseget? (I/N)",'I','N',i++)) {
                 if (beolvas("Olajtocsa hatasa alatt van? (I/N)", 'N', 'I', i++)) {
                     if (beolvas("Gyorsitani vagy Lassitani akar? (G/L))", 'G', 'L', i++)) {

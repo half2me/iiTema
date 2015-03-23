@@ -15,6 +15,7 @@ public class Map {
      */
     public Map() {
         this.blocks = new ArrayList<MapBlock>(0);
+        System.out.println("<<create>> Map");
     }
 
 
@@ -27,6 +28,7 @@ public class Map {
         for(int i=0; i<n; i++){
             this.blocks.add(new MapBlock());
         }
+        System.out.println("<<create>> Map");
     }
 
 

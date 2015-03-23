@@ -11,6 +11,7 @@ public class Oil extends Modifier {
      * This is a constructor for the Oil class.
      */
     public Oil() {
+        System.out.println("<<create>> Oil");
     }
 
 

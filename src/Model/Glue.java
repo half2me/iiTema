@@ -10,6 +10,7 @@ public class Glue extends Modifier {
      * This is a constructor for the Glue class.
      */
     public Glue() {
+        System.out.println("<<create>> Glue");
     }
 
 

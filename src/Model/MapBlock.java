@@ -15,6 +15,7 @@ public class MapBlock {
      */
     public MapBlock() {
         this.elements = new ArrayList<BasicGameElement>(0);
+        System.out.println("<<create>> MapBlock");
     }
 
 

@@ -6,7 +6,7 @@ package Model;
 public class Abyss extends Modifier {
 
     public Abyss() {
-
+        System.out.println("<<create>> Abyss");
     }
 
     /**
