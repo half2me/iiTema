@@ -90,6 +90,12 @@ public class Game {
         return igaz;
     }
 
+    public static void sorbair(String g,int eddig)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        for(int K=0;K<eddig;K++)System.out.print("  ");
+        System.out.println(g);
+    }
+
     public static void main(String[] args) throws IOException{
         int i=0;
         do{
@@ -98,33 +104,36 @@ public class Game {
                 if(beolvas("Eppen ugrik? (I/N)",'I','N',i++)){
                     if(beolvas("A csapda utkozne mas csapdaval ? (I/N)",'I','N',i++)){
 
-                        System.out.println("a csapda elhelyezese nem tortenik meg");
-                    }else System.out.println("a csapda elhelyezese");
-                }else System.out.println("a csapda elhelyezese nem tortenik meg");
+                        sorbair("a csapda elhelyezese nem tortenik meg", i);
+                    }else{
+                        sorbair("a csapda elhelyezese",i);
+
+                    }
+                }else sorbair("a csapda elhelyezese nem tortenik meg",i);
 
             }else if(beolvas("Ragacsot szeretne letenni? (I/N)",'I','N',i++)){
                 if(beolvas(" Eppen ugrik? (I/N)",'I','N',i++)){
                     if(beolvas(" A csapda utkozne mas csakpdaval ? (I/N)",'I','N',i++)){
 
-                        System.out.println("a csapda elhelyezese nem tortenik meg");
-                    }else System.out.println("a csapda elhelyezese");
-                }else System.out.println("a csapda elhelyezese nem tortenik meg");
-            }else System.out.println("tovabb lepes");
+                        sorbair("a csapda elhelyezese nem tortenik meg",i);
+                    }else sorbair("a csapda elhelyezese",i);
+                }else sorbair("a csapda elhelyezese nem tortenik meg",i);
+            }else sorbair("tovabb lepes",i);
             i=1;
             if(beolvas("Akadaly kovetkezik: Atugorja? (I/N)",'N','I',i++)){
                 if(beolvas("Milyen akadaly kovetkezik Szakadek ? (I/N)",'N','I',i++)){
                     if(beolvas("Milyen akadaly kovetkezik  Ragacs vagy Olaj folt? ? (R/O)",'R','O',i++)){
 
-                        System.out.println("Az on sebessege fokozott mertekben lecsokkent");
-                    }else System.out.println("Most kis idore nem tudja megvaltoztani a sebesseget.\n");
-                }else System.out.println("On sajnos kiesett a jatekbol.");
+                        sorbair("Az on sebessege fokozott mertekben lecsokkent",i);
+                    }else sorbair("Most kis idore nem tudja megvaltoztani a sebesseget.",i);
+                }else sorbair("On sajnos kiesett a jatekbol.",i);
             }i=1;
             if(beolvas("Kivanja modositani a sebesseget? (I/N)",'I','N',i++)) {
                 if (beolvas("Olajtocsa hatasa alatt van? (I/N)", 'N', 'I', i++)) {
                     if (beolvas("Gyorsitani vagy Lassitani akar? (G/L))", 'G', 'L', i++)) {
 
-                        System.out.println("Az on sebessege megnovekedett");
-                    } else System.out.println("Az on sebessege csokent");
+                        sorbair("Az on sebessege megnovekedett",i);
+                    } else sorbair("Az on sebessege csokent",i);
                 }
             }i=1;
 
