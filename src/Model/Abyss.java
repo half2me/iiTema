@@ -21,6 +21,7 @@ public class Abyss extends Modifier {
      */
     public void Modify(Player p) {
         System.out.println("Modify method from Modifier class");
+        p.Destroy();
     }
 
 
