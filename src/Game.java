@@ -1,6 +1,5 @@
 import Model.Map;
 import Model.Player;
-import com.sun.tools.javac.jvm.Gen;
 
 import java.util.ArrayList;
 

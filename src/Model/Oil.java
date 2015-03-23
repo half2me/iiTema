@@ -1,5 +1,4 @@
 package Model;
-import java.util.*;
 
 /**
  * This class represents the Oil modifier.
