@@ -12,7 +12,7 @@ public class Player extends BasicGameElement {
      */
     public Player(String name) {
         this.inAir = false;
-        this.speed = 1;
+        this.speed = 2;
         this.canPlaceMod = true;
         this.speedChangeable = true;
         this.name = name;

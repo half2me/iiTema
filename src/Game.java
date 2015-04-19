@@ -2,6 +2,7 @@ import Model.Map;
 import Model.Player;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class is responsible for the most important components of the game.
@@ -16,7 +17,7 @@ public class Game {
             while(true){
                 tick();
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {}
             }
         }
@@ -61,6 +62,7 @@ public class Game {
         CreatePlayer("Beni");
         CreatePlayer("Madar");
         timer.start();
+
     }
 
     /**
@@ -76,8 +78,17 @@ public class Game {
      */
     public void tick()
     {
-        for(Player p : players){
-            for(int i=0; i < p.GetSpeed(); i++) {
+        for(Iterator<Player> it = players.iterator(); it.hasNext();) {
+            Player pl = it.next();
+            if(pl.GetPosition() == null) {
+                it.remove();
+            }
+        }
+
+        if(players.isEmpty()) Exit();
+
+        for(Player p : players) {
+            for (int i = 0; i < p.GetSpeed(); i++) {
                 map.MoveElement(1, p); // We move the player one block at a time, so he steps on all blocks
                 p.Step();
             }

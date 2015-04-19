@@ -62,8 +62,8 @@ public class Map {
      */
     public void MoveElement (int offset, BasicGameElement e){
         MapBlock mb = e.GetPosition();
-        mb.RemoveElement(e); // remove from old block
         blocks.get(blocks.indexOf(mb) + offset).AddElement(e); // Add to new block
+        mb.RemoveElement(e); // remove from old block
     }
 
     public void debugPrintMap(){

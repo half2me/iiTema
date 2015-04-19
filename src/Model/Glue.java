@@ -19,6 +19,7 @@ public class Glue extends Modifier {
      */
     public void Modify(Player p) {
         System.out.println("Modify method from Glue class");
+        if(p.GetSpeed()<2) return;
         p.ModifySpeed(p.GetSpeed()/2);
     }
 

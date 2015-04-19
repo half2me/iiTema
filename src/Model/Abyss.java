@@ -27,7 +27,8 @@ public class Abyss extends Modifier {
      */
     public void Modify(Player p) {
         System.out.println("Abyss killed player");
+        p.ModifySpeed(0);
         p.Destroy();
     }
-    
+
 }

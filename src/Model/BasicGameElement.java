@@ -13,6 +13,7 @@ public abstract class BasicGameElement {
     public void Destroy() {
         System.out.println("Destroy method from BasicGameElement class");
         this.position.RemoveElement(this);
+        this.position = null;
     }
 
 
