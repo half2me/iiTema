@@ -1,3 +1,4 @@
+import Model.Controller;
 import Model.Map;
 import Model.Player;
 
@@ -11,6 +12,7 @@ public class Game {
 
     private Map map;
     private ArrayList<Player> players;
+    private ArrayList<Controller> controllers;
     private class Timer implements Runnable{
         @Override
         public void run() {
@@ -23,6 +25,24 @@ public class Game {
         }
     }
     private Thread timer;
+    private class InputWatcher implements Runnable{
+
+        @Override
+        public void run() {
+            while(true){
+                // Wait for keyboard event //
+                char ch = 'b'; // <- Input from keyboard
+                for(Controller c : controllers){
+                    c.Action(ch);
+                }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+    private Thread inputWatcher = new Thread(new InputWatcher());
+
 
     /**
      * That is az empty constructor for the Game class.
@@ -30,6 +50,7 @@ public class Game {
     public Game() {
         this.players = new ArrayList<Player>(1);
         this.timer = new Thread(new Timer());
+        this.controllers = new ArrayList<Controller>(1);
     }
 
     /**
@@ -46,9 +67,11 @@ public class Game {
      * @param name
      * Use this if you want to create a new Player.
      */
-    public void CreatePlayer(String name) {
+    public void CreatePlayer(String name, char left, char right, char jump, char mod1, char mod2) {
         System.out.println("CreatePlayer method from Game class");
         Player p = new Player(name);
+        Controller c = new Controller(p, left, right, jump, mod1, mod2);
+        controllers.add(c);
         players.add(p);
         this.map.AddElement(0, p); // Add the player to the start line
     }
@@ -59,8 +82,9 @@ public class Game {
     public void NewGame() {
         System.out.println("NewGame method from Game class");
         GenerateRandomMap();
-        CreatePlayer("Beni");
-        CreatePlayer("Madar");
+        CreatePlayer("Beni", 'a', 'd', 'w', 'q', 'e');
+        CreatePlayer("Madar", 'j', 'l', 'i', 'u', 'o');
+        //inputWatcher.start();  // <- uncomment when functional
         timer.start();
 
     }
@@ -78,6 +102,7 @@ public class Game {
      */
     public void tick()
     {
+        /* We check for any players that died, but are still in our list, and remove them */
         for(Iterator<Player> it = players.iterator(); it.hasNext();) {
             Player pl = it.next();
             if(pl.GetPosition() == null) {
@@ -85,7 +110,7 @@ public class Game {
             }
         }
 
-        if(players.isEmpty()) Exit();
+        if(players.isEmpty()) Exit(); // If there are no more players, its game over
 
         for(Player p : players) {
             for (int i = 0; i < p.GetSpeed(); i++) {
