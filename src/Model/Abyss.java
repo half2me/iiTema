@@ -29,6 +29,5 @@ public class Abyss extends Modifier {
         System.out.println("Abyss killed player");
         p.Destroy();
     }
-
-
+    
 }

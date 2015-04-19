@@ -10,14 +10,26 @@ public class Game {
 
     private Map map;
     private ArrayList<Player> players;
+    private class Timer implements Runnable{
+        @Override
+        public void run() {
+            while(true){
+                tick();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+    private Thread timer;
 
     /**
      * That is az empty constructor for the Game class.
      */
     public Game() {
         this.players = new ArrayList<Player>(1);
+        this.timer = new Thread(new Timer());
     }
-
 
     /**
      *This method generates a Map which contains game elements randomly.
@@ -45,18 +57,17 @@ public class Game {
      */
     public void NewGame() {
         System.out.println("NewGame method from Game class");
-        // TODO implement here
         GenerateRandomMap();
-        CreatePlayer("TestPlayer");
-        this.map.debugPrintMap();
+        CreatePlayer("Beni");
+        CreatePlayer("Madar");
+        timer.start();
     }
 
     /**
      * This method is called when a game has finished.
      */
     public void Exit() {
-        System.out.println("Exit method from Game class");
-        // TODO implement here
+        timer.stop();
     }
 
     /**
@@ -66,9 +77,12 @@ public class Game {
     public void tick()
     {
         for(Player p : players){
-            map.MoveElement(p.GetSpeed(), p);
-            p.Step();
+            for(int i=0; i < p.GetSpeed(); i++) {
+                map.MoveElement(1, p); // We move the player one block at a time, so he steps on all blocks
+                p.Step();
+            }
         }
+        this.map.debugPrintMap();
     }
 
     /**
