@@ -41,10 +41,8 @@ public class Game {
         public void run() {
             while(true){
                 // Wait for keyboard event //
-                char ch = 'b'; // <- Input from keyboard
-                for(Controller c : controllers){
-                    c.Action(ch);
-                }
+                char key = 'b'; // <- Input from keyboard
+                InputEvent(key);
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {}
@@ -122,10 +120,27 @@ public class Game {
 
         for(Player p : players) {
             for (int i = 0; i < p.GetSpeed(); i++) {
-                map.MoveElement(1, p); // We move the player one block at a time, so he steps on all blocks
-                p.Step();
+                // First, check if a player has reached the finish line
+                if(map.isLast(p)) {
+                    System.out.println(p.GetName() + " has won the game!!!");
+                    Exit();
+                }
+                else{
+                    map.MoveElement(1, p); // We move the player one block at a time, so he steps on all blocks
+                    p.Step();
+                }
             }
         }
         this.map.debugPrintMap();
+    }
+
+    /**
+     * Use this method to input a keypress into the game
+     * @param c key# of key pressed
+     */
+    public void InputEvent(char c){
+        for(Controller con : controllers){
+            con.Action(c);
+        }
     }
 }

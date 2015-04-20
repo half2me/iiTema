@@ -66,6 +66,15 @@ public class Map {
         mb.RemoveElement(e); // remove from old block
     }
 
+    /**
+     * Checks if a game element is at the end of the map
+     * @param bge the Basic Game element to check
+     * @return true, if the element is at the end of the map
+     */
+    public boolean isLast( BasicGameElement bge){
+        return ( blocks.indexOf(bge.GetPosition()) == blocks.size()-1 );
+    }
+
     public void debugPrintMap(){
         for( MapBlock mb : blocks){
             System.out.print("[" + blocks.indexOf(mb) + "] -> ");

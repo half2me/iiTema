@@ -122,5 +122,7 @@ public class Player extends BasicGameElement {
         this.speedChangeable = true;
     }
 
-
+    public String GetName(){
+        return this.name;
+    }
 }
