@@ -11,7 +11,6 @@ public abstract class BasicGameElement {
      * Call this method to destroy an object.
      */
     public void Destroy() {
-        System.out.println("Destroy method from BasicGameElement class");
         this.position.RemoveElement(this);
         this.position = null;
     }
@@ -22,7 +21,6 @@ public abstract class BasicGameElement {
      * This method returns the MapBlock that the element is on.
      */
     public MapBlock GetPosition() {
-        System.out.println("GetPosition method from BasicGameElement class");
         return this.position;
     }
 
@@ -31,7 +29,6 @@ public abstract class BasicGameElement {
      * Sets the MapBlock that the element is on.
      */
     public void SetPosition(MapBlock b) {
-        System.out.println("SetPosition method from BasicGameElement class");
         this.position = b;
     }
 

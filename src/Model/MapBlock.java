@@ -23,7 +23,6 @@ public class MapBlock {
      * This method adds an element to a MapBlock.
      */
     public void AddElement(BasicGameElement e) {
-        System.out.println("AddElement method from MapBlock class");
         this.elements.add(e);
         e.SetPosition(this);
     }
@@ -34,7 +33,6 @@ public class MapBlock {
      * This method removes an element from the MapBlock.
      */
     public void RemoveElement(BasicGameElement e) {
-        System.out.println("RemoveElement method from MapBlock class");
         this.elements.remove(e);
     }
 
@@ -44,7 +42,6 @@ public class MapBlock {
      * This method can return with an ArrayList which stores basic game elements.
      */
     public ArrayList<BasicGameElement> GetElements() {
-        //System.out.println("GetElements method from MapBlock class");
         return this.elements;
     }
 

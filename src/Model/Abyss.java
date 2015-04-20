@@ -5,10 +5,6 @@ package Model;
  */
 public class Abyss extends Modifier {
 
-
-    /**
-     * This is a constructor for the Abyss class.
-     */
     public Abyss() {
     }
 
@@ -26,7 +22,6 @@ public class Abyss extends Modifier {
      * The method kills the Player.
      */
     public void Modify(Player p) {
-        System.out.println("Abyss killed player");
         p.ModifySpeed(0);
         p.Destroy();
     }

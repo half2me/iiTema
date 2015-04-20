@@ -5,13 +5,8 @@ package Model;
  */
 public abstract class Modifier extends BasicGameElement {
 
-
-    /**
-     * This is a constructor for the Modifier class.
-     */
     public Modifier() {
     }
-
 
     /**
      * @param p The Player to Modify

@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Matches keys to Player actions
+ */
 public class Controller {
     private Player player;
     private char left;
@@ -17,6 +20,12 @@ public class Controller {
         this.mod2 = mod2;
     }
 
+    /**
+     * Pass keyevents to Controller with this method
+     * When this method is called, if a keymatch is found
+     * the appropriate method will be called in the Player object
+     * @param c the key#
+     */
     public void Action(char c){
         if(c == left){
             if(player.GetSpeed() < 2) return;

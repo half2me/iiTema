@@ -50,7 +50,7 @@ public class Player extends BasicGameElement {
 
 
     /**
-     * This parameter shows us the Player can modify his/her speed or not.
+     * This parameter shows us if the Player can modify his/her speed or not.
      */
     private boolean speedChangeable;
 
@@ -60,7 +60,6 @@ public class Player extends BasicGameElement {
      * @param m the modifier to place
      */
     public void PlaceMod(Modifier m) {
-        System.out.println("PlaceMod method from Player class");
         if(this.canPlaceMod && this.inAir){
             this.GetPosition().AddElement(m);
         }
@@ -72,7 +71,6 @@ public class Player extends BasicGameElement {
      * This can modify the speed of the Player.
      */
     public void ModifySpeed(int bps) {
-        System.out.println("ModifySpeed method from Player class");
         this.speed = bps;
     }
 
@@ -81,7 +79,6 @@ public class Player extends BasicGameElement {
      * @return the speed of the player
      */
     public int GetSpeed() {
-        System.out.println("GetSpeed method from Player class");
         return this.speed;
     }
 
@@ -90,7 +87,6 @@ public class Player extends BasicGameElement {
      * The Player can jump using this method.
      */
     public void Jump() {
-        System.out.println("Jump method from Player class");
         this.inAir = true;
     }
 
@@ -101,7 +97,6 @@ public class Player extends BasicGameElement {
      * and if needed execute their modifying function.
      */
     public void Step() {
-        System.out.println("Step method from Player class");
         if(!inAir){
             for(BasicGameElement e : this.GetPosition().GetElements()){
                 if(e instanceof Modifier){
@@ -113,19 +108,17 @@ public class Player extends BasicGameElement {
 
 
     /**
-     * Using this to lock the Player's speed
+     * Lock the Player's speed
      */
     public void LockSpeed() {
-        System.out.println("LockSpeed method from Player class");
         this.speedChangeable = false;
     }
 
 
     /**
-     * Using this method the speed of the Player will be changeable.
+     * Make the speed changeable
      */
     public void UnlockSpeed() {
-        System.out.println("UnlockSpeed method from Player class");
         this.speedChangeable = true;
     }
 

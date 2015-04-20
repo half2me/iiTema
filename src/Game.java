@@ -10,9 +10,14 @@ import java.util.Iterator;
  */
 public class Game {
 
+    public boolean isRunning;
     private Map map;
     private ArrayList<Player> players;
     private ArrayList<Controller> controllers;
+
+    /**
+     * This class is responsible for periodically calling the tick method of the Game object
+     */
     private class Timer implements Runnable{
         @Override
         public void run() {
@@ -25,6 +30,11 @@ public class Game {
         }
     }
     private Thread timer;
+
+    /**
+     * This class is responsible for listening to keyboard input events, and forwarding them
+     * to the controllers
+     */
     private class InputWatcher implements Runnable{
 
         @Override
@@ -43,10 +53,6 @@ public class Game {
     }
     private Thread inputWatcher = new Thread(new InputWatcher());
 
-
-    /**
-     * That is az empty constructor for the Game class.
-     */
     public Game() {
         this.players = new ArrayList<Player>(1);
         this.timer = new Thread(new Timer());
@@ -54,21 +60,24 @@ public class Game {
     }
 
     /**
-     *This method generates a Map which contains game elements randomly.
+     *This method generates a Map which contains game elements at random.
      */
     public void GenerateRandomMap() {
-        System.out.println("GenerateRandomMap method from Game class");
         map = new Map(100); // 100 blocks
         map.PlaceRandomMods(90);
     }
 
 
     /**
-     * @param name
-     * Use this if you want to create a new Player.
+     * Creates a new Player
+     * @param name Name of the player
+     * @param left key# for left
+     * @param right key# for right
+     * @param jump key# for jump
+     * @param mod1 key# for Glue
+     * @param mod2 key# for Oil
      */
     public void CreatePlayer(String name, char left, char right, char jump, char mod1, char mod2) {
-        System.out.println("CreatePlayer method from Game class");
         Player p = new Player(name);
         Controller c = new Controller(p, left, right, jump, mod1, mod2);
         controllers.add(c);
@@ -80,12 +89,9 @@ public class Game {
      * Users can start a new game calling this method.
      */
     public void NewGame() {
-        System.out.println("NewGame method from Game class");
-        GenerateRandomMap();
-        CreatePlayer("Beni", 'a', 'd', 'w', 'q', 'e');
-        CreatePlayer("Madar", 'j', 'l', 'i', 'u', 'o');
-        //inputWatcher.start();  // <- uncomment when functional
-        timer.start();
+        //inputWatcher.start();  // <- uncomment when not in debug mode
+        //timer.start(); // <- uncomment when not in debug mode
+        isRunning = true;
 
     }
 
@@ -93,7 +99,8 @@ public class Game {
      * This method is called when a game has finished.
      */
     public void Exit() {
-        timer.stop();
+        //timer.stop(); // <- uncomment when not in debug mode
+        isRunning = false;
     }
 
     /**
@@ -102,6 +109,7 @@ public class Game {
      */
     public void tick()
     {
+        if(!isRunning) return; // Don't do anything if the game isn't started yet
         /* We check for any players that died, but are still in our list, and remove them */
         for(Iterator<Player> it = players.iterator(); it.hasNext();) {
             Player pl = it.next();
@@ -120,13 +128,4 @@ public class Game {
         }
         this.map.debugPrintMap();
     }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-
-    }
-
-
 }

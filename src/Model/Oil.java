@@ -5,20 +5,14 @@ package Model;
  */
 public class Oil extends Modifier {
 
-
-    /**
-     * This is a constructor for the Oil class.
-     */
     public Oil() {
     }
 
-
     /**
      * @param p
-     * This method can disincline the Player to change his/her speed for a few seconds.
+     * Locks the player's speed
      */
     public void Modify(Player p) {
-        System.out.println("Modify method from Oil class");
         p.LockSpeed();
     }
 
