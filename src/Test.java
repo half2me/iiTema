@@ -13,6 +13,8 @@ public class Test {
         // Create two test players
         g.CreatePlayer("Beni", 'a', 'd', 'w', 'q', 'e');
         g.CreatePlayer("Madar", 'j', 'l', 'i', 'u', 'o');
+        // Create 3 cleanup robots
+        g.AddRobots(3);
         // Start the game
         g.NewGame();
 

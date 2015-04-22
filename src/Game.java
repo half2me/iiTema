@@ -1,9 +1,12 @@
 import Model.Controller;
 import Model.Map;
 import Model.Player;
+import Model.Robot;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * This class is responsible for the most important components of the game.
@@ -14,6 +17,7 @@ public class Game {
     private Map map;
     private ArrayList<Player> players;
     private ArrayList<Controller> controllers;
+    private ArrayList<Robot> robots;
 
     /**
      * This class is responsible for periodically calling the tick method of the Game object
@@ -55,6 +59,7 @@ public class Game {
         this.players = new ArrayList<Player>(1);
         this.timer = new Thread(new Timer());
         this.controllers = new ArrayList<Controller>(1);
+        this.robots = new ArrayList<Robot>(0);
     }
 
     /**
@@ -81,6 +86,18 @@ public class Game {
         controllers.add(c);
         players.add(p);
         this.map.AddElement(0, p); // Add the player to the start line
+    }
+
+    /**
+     * Add cleanup robots to the game
+     * @param n number of robots to add
+     */
+    public void AddRobots(int n){
+        for(int i = 0; i<n; i++){
+            Robot r = new Robot(new Random().nextInt(2)+1);
+            this.robots.add(r);
+            this.map.AddElement(new Random().nextInt(100),r);
+        }
     }
 
     /**
@@ -129,6 +146,19 @@ public class Game {
                     map.MoveElement(1, p); // We move the player one block at a time, so he steps on all blocks
                     p.Step();
                 }
+            }
+        }
+
+        // Now lets move the clean-up robots
+        for(Robot r : robots){
+            for(int i=0; i < r.GetSpeed(); i++) {
+                try{
+                    if(r.GetSpeed()>0) map.MoveElement(1, r);
+                    else map.MoveElement(-1, r);
+                } catch (IndexOutOfBoundsException e){
+                    r.Bounce();
+                }
+                r.Step();
             }
         }
         this.map.debugPrintMap();

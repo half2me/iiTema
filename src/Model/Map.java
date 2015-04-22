@@ -83,6 +83,7 @@ public class Map {
                     if(e instanceof Abyss) System.out.print("Abyss");
                     if(e instanceof Glue) System.out.print("Glue");
                     if(e instanceof Oil) System.out.print("Oil");
+                    if(e instanceof Robot) System.out.print("Robot");
                 }
             System.out.println();
         }
